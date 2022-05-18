@@ -14,7 +14,7 @@ use lojinhapamella;
 
 -- Criando uma tabela
 -- int ➞ tipo de dado - números inteiros
--- decimal (exemplo: 10,2) ➞ tipo de dado - números não inteiros
+-- decimal (10,2) ➞ tipo de dado - números não inteiros
 -- (10,2) ➞ 10 dígitos com 2 casas decimais
 -- primary key ➞ transforma o campo em chave primária
 -- auto_increment ➞ numeração automática
