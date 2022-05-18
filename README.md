@@ -1,1 +1,1 @@
-# BancoPamella-MySQL
+# MySQL
