@@ -31,6 +31,11 @@ obs varchar(255)
 
 describe fornecedores;
 
+insert into  fornecedores (cnpj,razao,fantasia,fone,cep,endereco,numero,bairro,cidade,uf)
+values ('99.152.736/0001-33','Pamella Pereto','Loja Senhoritta','(11) 92621-6085','03728-000','Rua São José do Campestre','390','Jardim Danfer','São Paulo','SP');
+
+select * from fornecedores;
+
 create table produtos(
 	codigo int primary key auto_increment,
     barcode varchar(255),
@@ -52,37 +57,38 @@ create table produtos(
     
 describe produtos;
     
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('1234567890','saia','rosa','Renner',21220525,3,5,'UN','Setor Roupas',54.90,55,109.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('1234567890','saia','rosa','Renner',21220525,3,5,'UN','Setor Roupas',54.90,55,109.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('1111111111','blusa','verde','Renner',21220525,20,5,'UN','Setor Roupas',59.90,60,119.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('1111111111','blusa','verde','Renner',21220525,20,5,'UN','Setor Roupas',59.90,60,119.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('2222222222','vestido','amarelo','Marisa',20220519,14,9,'UN','Setor Roupas',39.90,85,124.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('2222222222','vestido','amarelo','Marisa',20220519,14,9,'UN','Setor Roupas',39.90,85,124.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('3333333333','cropped','azul','Marisa',20220518,19,13,'UN','Setor Roupas',99.90,99.59,199.49);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('3333333333','cropped','azul','Marisa',20220518,19,13,'UN','Setor Roupas',99.90,99.59,199.49, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('4444444444','calça','branca','Shein',20220517,15,8,'UN','Setor Roupas',33.90,40.59,74.49);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('4444444444','calça','branca','Shein',20220517,15,8,'UN','Setor Roupas',33.90,40.59,74.49, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('5555555555','chemise','listrado','Shein',21220525,4,10,'UN','Setor Roupas',49.90,65,114.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('5555555555','chemise','listrado','Shein',21220525,4,10,'UN','Setor Roupas',49.90,65,114.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('6666666666','shorts','jeans','Forever 21',21220525,50,30,'UN','Setor Roupas',33.33,51.57,84.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('6666666666','shorts','jeans','Forever 21',21220525,50,30,'UN','Setor Roupas',33.33,51.57,84.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('7777777777','bermuda','jeans','Forever 21',21220525,33,24,'UN','Setor Roupas',19.90,25,44.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('7777777777','bermuda','jeans','Forever 21',21220525,33,24,'UN','Setor Roupas',19.90,25,44.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('8888888888','casaco','marrom','C&A',21220525,22,16,'UN','Setor Roupas',24.90,25,49.90);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('8888888888','casaco','marrom','C&A',21220525,22,16,'UN','Setor Roupas',24.90,25,49.90, 1);
 
-insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda)
-values ('9999999999','macacão','rosa','C&A',21220525,18,17,'UN','Setor Roupas',19,35.49,54.49);
+insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,venda, idfor)
+values ('9999999999','macacão','rosa','C&A',21220525,18,17,'UN','Setor Roupas',19,35.49,54.49, 1);
     
 select * from produtos;
+
 -- Inventário de estoque (patrimônio)
 -- sum() ➙ função de soma no banco de dados
 select sum(estoque * custo) as Total from produtos;
@@ -169,21 +175,20 @@ idcli int not null,
 foreign key (idcli) references clientes(idcli)
 );
 
--- aberturas de pedidos
+-- Abertura de pedidos
 insert into pedidos(idcli) values(1);
 
--- verificar pedidos
-select * from pedidos where pedido = 1;
+-- Verificar pedidos
+select * from pedidos where pedido;
 
--- verificar pedidos junto com o nome do cliente
+-- Verificar pedidos junto com o nome do cliente
 -- inner join (unir informações de 2 ou mais tabelas)
--- 
+-- IMPORTANTE! Indicar as chaves FK e PK
 select * from pedidos inner join clientes
 on pedidos.idcli = clientes.idcli;
 
--- verificar pedidos junto com o nome do cliente (relatório simplificado)
+-- Verificar pedidos junto com o nome do cliente (relatório simplificado)
 -- %H:%i ➙ exibir também o horario formatado
-
 select
 pedidos.pedido,
 date_format(pedidos.dataped, '%d%m%Y - %H:%i') as data_ped,
@@ -191,3 +196,43 @@ clientes.nome as cliente,
 clientes.fone
 from pedidos inner join clientes
 on pedidos.idcli = clientes.idcli;
+
+
+-- ====== Linha de tabela de carrinho =======
+-- Tabela de apoio para criar um relacionamento de tipo M-M
+-- (Muitos para Muitos), neste caso não criamos a chave primária
+
+
+create table carrinho (
+	pedido int not null,
+    codigo int not null,
+    quantidade int not null,
+    foreign key(pedido) references pedidos(pedido),
+    foreign key(codigo) references produtos(codigo)
+);
+
+insert into carrinho values (1,8,3);
+insert into carrinho values (1,9,1);
+
+select * from carrinho;
+
+-- Exibir o carrinho
+select pedidos.pedido,
+carrinho.codigo as Código,
+produtos.produto,
+carrinho.quantidade,
+produtos.venda,
+produtos.venda * carrinho.quantidade as Subtotal
+from (carrinho inner join pedidos on carrinho.pedido = pedidos.pedido)
+inner join produtos on carrinho.codigo = produtos.codigo;
+
+-- Total do pedido (encontrado em carrinho) ➙ Fechamento
+select sum(produtos.venda * carrinho.quantidade) as Total
+from carrinho inner join produtos on carrinho.codigo = produtos.codigo;
+
+-- Atualização do estoque
+update carrinho
+inner join produtos
+on carrinho.codigo = produtos.codigo
+set produtos.estoque = produtos.estoque - carrinho.quantidade
+where carrinho.quantidade > 0;
