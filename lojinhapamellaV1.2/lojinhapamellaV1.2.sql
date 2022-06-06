@@ -8,6 +8,29 @@ show databases;
 
 use lojinhapamella;
 
+-- Unique (não permitir valores duplicados)
+create table usuarios(
+	idusu int primary key auto_increment,
+    usuario varchar(255) not null,
+    login varchar(255) not null unique,
+    senha varchar(255) not null,
+    perfil varchar(255) not null
+);
+
+describe usuarios;
+
+-- Para inserir uma senha com criptografia usamos md5()
+insert into usuarios(usuario,login,senha,perfil)
+values('Administrador','admin',md5('admin'),'admin');
+insert into usuarios(usuario,login,senha,perfil)
+values('Pamella Pereto','pamellapereto',md5('123456'),'user');
+
+select * from usuarios;
+
+-- Acessando o sistema pela tela de login
+-- and (função lógica onde todas as condições devem ser verdadeiras)
+select * from usuarios where login='admin' and senha=md5('admin');
+
 create table fornecedores(
 idfor int primary key auto_increment,
 cnpj varchar(255) not null unique,
