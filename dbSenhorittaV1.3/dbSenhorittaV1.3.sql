@@ -1,5 +1,5 @@
 /* OBSERVAÇÃO:
-Professor, caso esteja vendo este script para corrigi-lo, acabei de terminá-lo em casa e amanhã (sexta-feira, dia 09/06) irei para o SENAC
+Professor, caso esteja vendo este script para corrigi-lo, acabei de terminá-lo em casa e amanhã (sexta-feira, dia 10/06) irei para o SENAC
 e gerarei sua engenharia reversa (Diagrama Entidade Relacionamento) e documentação*/
 
 /*
