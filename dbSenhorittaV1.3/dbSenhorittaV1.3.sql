@@ -250,25 +250,12 @@ insert into carrinho values (2,2,1);
 insert into carrinho values (2,3,4);
 
 
-select * from carrinho;
-
 -- Exibir o carrinho
 select pedidos.pedido,
 carrinho.codigo as código,
 produtos.produto,
 carrinho.quantidade,
 (produtos.custo + ((produtos.custo * produtos.lucro)/100)) as venda,
-((produtos.custo + ((produtos.custo * produtos.lucro)/100)) * carrinho.quantidade)  as subtotal, 
+((produtos.custo + ((produtos.custo * produtos.lucro)/100)) * carrinho.quantidade)  as subtotal
 from (carrinho inner join pedidos on carrinho.pedido = pedidos.pedido)
 inner join produtos on carrinho.codigo = produtos.codigo;
-
--- Total do pedido (encontrado em carrinho) ➙ Fechamento
-select sum((produtos.custo + ((produtos.custo * produtos.lucro)/100)) * carrinho.quantidade) as total
-from carrinho inner join produtos on carrinho.codigo = produtos.codigo;
-
--- Atualização do estoque
-update carrinho
-inner join produtos
-on carrinho.codigo = produtos.codigo
-set produtos.estoque = produtos.estoque - carrinho.quantidade
-where carrinho.quantidade > 0;
