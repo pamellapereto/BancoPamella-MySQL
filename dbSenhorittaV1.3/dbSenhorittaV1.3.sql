@@ -34,8 +34,6 @@ values ('José de Assis', 'josedeassis',md5('654321'),'user');
 
 select * from usuarios;
 
-update usuarios set usuario = 'José de Assis', login = 'root', senha = md5('root'), perfil = 'admin' where idusu = 3;
-
 -- Acessando o sistema pela tela de login
 -- and (função lógica onde todas as condições devem ser verdadeiras)
 select * from usuarios where login='admin' and senha=md5('admin');
@@ -118,48 +116,37 @@ values ('5555555555','vestido','listrado','Altamoda',9,12,'UN','Setor Vestidos',
     
 select * from produtos;
 
+-- Obter o preço de venda de cada produto
+select codigo as código, produto, custo,
+(custo + ((custo * lucro)/100)) as venda
+from produtos;
+
 -- Inventário de estoque (patrimônio)
 -- sum() ➙ função de soma no banco de dados
-select sum(estoque * custo) as Total from produtos;
+select sum(estoque * custo) as total from produtos;
 
 -- Relatório de reposição de estoque 1
 select * from produtos where estoque < estoquemin;
 
 -- Relatório de reposição de estoque 2
--- date_format() ➙ função usada para formatar a data
--- %d/%m/%Y dd/mm/aaaa | %d/%m/%y dd/mm/aa
-select codigo,produto,
-date_format(dataval, '%d/%m/%Y') as data_validade,
-estoque, estoquemin as estoque_mínimo
+select codigo, produto, fabricante,
+estoque, estoquemin as estoque_mínimo, custo, lucro
 from produtos where estoque < estoquemin;
-
--- Relatório de validade de produtos 1
-select codigo,produto,
-date_format(dataval, '%d/%m/%Y') as data_validade
-from produtos;
-
--- Relatório de validade de produtos 2
--- datediff() ➙ calcular a diferença em dias
--- curdate() ➙ obtém a data atual
-select codigo,produto,
-date_format(dataval, '%d/%m/%Y') as data_validade,
-datediff(dataval, curdate()) as dias_restantes
-from produtos;
 
 
 create table clientes (
  idcli int primary key auto_increment,
- nome varchar (255) not null,
- fone varchar(255) not null,
- cpf varchar(255) unique,
-email varchar(255),
-marketing varchar(255) not null,
-cep varchar(255),
-endereco varchar(255),
-bairro varchar(255),
-numero varchar(255),
-complemento varchar(255),
-cidade varchar(255),
+ nome varchar (100) not null,
+ fone varchar(20) not null,
+ cpf varchar(14) unique,
+email varchar(50),
+marketing char(1) not null,
+cep varchar(9),
+endereco varchar(60),
+bairro varchar(50),
+numero varchar(10),
+complemento varchar(50),
+cidade varchar(50),
 uf char(2)
 );
 
@@ -189,12 +176,22 @@ select * from clientes;
 
 update clientes set fone = '1197231-5819' where idcli=6;
 
+-- Relatório personalizado de clientes 1 (focando em contato)
+select nome, fone as contato, email
+from clientes;
+
+-- Relatório personalizado de clientes 2 (focando em aniversário)
+select nome,
+date_format(nascimento, '%d/%m/%Y') as data_nascimento
+from clientes;
+
+-- Relatório personalizado de clientes 3 (focando em e-mail marketing)
+select nome, email from clientes where marketing = 's';
+
+
 -- foreign key(FK): chave estrangeira que cria o relacionamento
--- do tipo 1-N com a tabela clientes
 -- FK(pedidos)______________PK(clientes)
 -- Observação: Usar o mesmo nome e tipo de dados nas chaves (PK e FK)
-
------------------------------------------
 
 create table pedidos (
 pedido int primary key auto_increment,
@@ -205,10 +202,14 @@ foreign key (idcli) references clientes(idcli)
 );
 
 -- Abertura de pedidos
-insert into pedidos(idcli) values(1);
+insert into pedidos (idcli) values(3);
+
+insert into pedidos (idcli) values(4);
 
 -- Verificar pedidos
-select * from pedidos where pedido;
+select * from pedidos where pedido = 1;
+
+select * from pedidos where pedido = 2;
 
 -- Verificar pedidos junto com o nome do cliente
 -- inner join (unir informações de 2 ou mais tabelas)
@@ -222,14 +223,14 @@ select
 pedidos.pedido,
 date_format(pedidos.dataped, '%d%m%Y - %H:%i') as data_ped,
 clientes.nome as cliente,
-clientes.fone
+clientes.fone as contato
 from pedidos inner join clientes
 on pedidos.idcli = clientes.idcli;
 
 
--- ====== Linha de tabela de carrinho =======
+-- ====== Linha de tabela de carrinho ======
 -- Tabela de apoio para criar um relacionamento de tipo M-M
--- (Muitos para Muitos), neste caso não criamos a chave primária
+-- (Muitos para Muitos), neste caso não cria-se a chave primária
 
 
 create table carrinho (
@@ -240,23 +241,29 @@ create table carrinho (
     foreign key(codigo) references produtos(codigo)
 );
 
-insert into carrinho values (1,8,3);
-insert into carrinho values (1,9,1);
+insert into carrinho values (1,1,3);
+insert into carrinho values (1,2,1);
+insert into carrinho values (1,3,2);
+
+insert into carrinho values (2,1,2);
+insert into carrinho values (2,2,1);
+insert into carrinho values (2,3,4);
+
 
 select * from carrinho;
 
 -- Exibir o carrinho
 select pedidos.pedido,
-carrinho.codigo as Código,
+carrinho.codigo as código,
 produtos.produto,
 carrinho.quantidade,
-produtos.venda,
-produtos.venda * carrinho.quantidade as Subtotal
+(produtos.custo + ((produtos.custo * produtos.lucro)/100)) as venda,
+((produtos.custo + ((produtos.custo * produtos.lucro)/100)) * carrinho.quantidade)  as subtotal, 
 from (carrinho inner join pedidos on carrinho.pedido = pedidos.pedido)
 inner join produtos on carrinho.codigo = produtos.codigo;
 
 -- Total do pedido (encontrado em carrinho) ➙ Fechamento
-select sum(produtos.venda * carrinho.quantidade) as Total
+select sum((produtos.custo + ((produtos.custo * produtos.lucro)/100)) * carrinho.quantidade) as total
 from carrinho inner join produtos on carrinho.codigo = produtos.codigo;
 
 -- Atualização do estoque
